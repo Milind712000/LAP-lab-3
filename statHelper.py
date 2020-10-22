@@ -1,5 +1,5 @@
 from collections import Counter
-
+from matplotlib import pyplot as plt
 
 def getStats(txt, avoid_list):
     # return string of answer
@@ -37,4 +37,9 @@ def extractSentences(txt, keyTxt):
 
 def plotFrequency(txt, fpath):
     # plot histogram and store at given fpath as png
+    wordcount = Counter(txt.replace(".", " ").replace("\n", " ").replace(",", " ").replace(";", " ").replace("_", " ").lower().split())
+    plt.bar(wordcount.keys(), wordcount.values(), color='g')
+    plt.xticks(rotation=90)
+    plt.savefig(fpath)
     return
+
