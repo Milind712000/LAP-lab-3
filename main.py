@@ -21,28 +21,28 @@ def getAvoidDict(fpath):
 
 # filepicker 1
 fp1 = [
-    sg.Text("Main File"),
+    sg.Text("Main File", size=(20, 1)),
     sg.In(key="-mainFile-"),
     sg.FileBrowse(target="-mainFile-"),
-    sg.Button("Analyse")
+    sg.Button("Analyse", size=(10, 1))
 ]
 
 # filepicker 2
 fp2 = [
-    sg.Text("Keywords File"),
+    sg.Text("Keywords File", size=(20, 1)),
     sg.In(key="-keyFile-"),
     sg.FileBrowse(target="-keyFile-"),
-    sg.Button("Extract")
+    sg.Button("Extract", size=(10, 1))
 ]
 
 statBox = [
-    sg.Text("Statistics"),
-    sg.Multiline(key='-bigblob-', size=(100, 5))
+    sg.Text("Statistics", size=(20, 1)),
+    sg.Multiline(key='-bigblob-', size=(100, 10))
 ]
 
 grepBox = [
-    sg.Text("Extracted Sentences"),
-    sg.Multiline(key='-grep-', size=(100, 5))
+    sg.Text("Extracted Sentences", size=(20, 1)),
+    sg.Multiline(key='-grep-', size=(100, 10))
 ]
 
 topControls = [
@@ -58,13 +58,17 @@ histoPlot = [
 
 leftCol = [
     fp1,
-    fp2,
     statBox,
+    [sg.HSeparator()],
+    fp2,
     grepBox
 ]
 
 layout = [
     topControls,
+    [
+        sg.HSeparator()
+    ],
     [
         sg.Column(leftCol),
         sg.VSeperator(),
@@ -85,7 +89,7 @@ blankFig = os.path.join(baseDir, 'img', 'blankFig.png')
 histoFig = os.path.join(baseDir, 'img', 'histogram.png')
 plotPath = blankFig
 
-window = sg.Window('Text Analyze', layout, finalize=True)
+window = sg.Window('Text Analyze', layout, finalize=True, font="Helvetica 10")
 window['-PLOT-'].Update(plotPath)
 
 while True:  # The Event Loop
