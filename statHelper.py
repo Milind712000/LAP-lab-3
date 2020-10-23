@@ -39,7 +39,7 @@ def extractSentences(txt, keyTxt):
 def plotFrequency(wordcount, fpath):
     # plot histogram and store at given fpath as png
     plt.figure(figsize=(12, 5))
-    ax = plt.bar(wordcount.keys(), wordcount.values(), color='g')
+    plt.bar(wordcount.keys(), wordcount.values(), color='g')
     plt.xticks(rotation=30, fontsize=5)
     plt.plot()
     plt.savefig(fpath)
