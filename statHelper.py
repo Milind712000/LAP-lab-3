@@ -1,6 +1,7 @@
 from collections import Counter
 from matplotlib import pyplot as plt
 
+
 def getStats(txt, avoid_list):
     # return string of answer
     lines = txt.count("\n")
@@ -27,7 +28,7 @@ def getStats(txt, avoid_list):
     stats = "Number of words in file = " + str(sum(wordcount.values())) + "\nNumber of sentences in file = " + str(
         sentences) + "\nNumber of newlines in file = " + str(lines) + "\nMost frequent word in file = " + str(mostf) + "\nLeast frequent word in file = " + str(leastf)
 
-    return stats
+    return stats, wordcount
 
 
 def extractSentences(txt, keyTxt):
@@ -35,11 +36,11 @@ def extractSentences(txt, keyTxt):
     return keyTxt
 
 
-def plotFrequency(txt, fpath):
+def plotFrequency(wordcount, fpath):
     # plot histogram and store at given fpath as png
-    wordcount = Counter(txt.replace(".", " ").replace("\n", " ").replace(",", " ").replace(";", " ").replace("_", " ").lower().split())
-    plt.bar(wordcount.keys(), wordcount.values(), color='g')
-    plt.xticks(rotation=90)
+    plt.figure(figsize=(12, 5))
+    ax = plt.bar(wordcount.keys(), wordcount.values(), color='g')
+    plt.xticks(rotation=30, fontsize=5)
+    plt.plot()
     plt.savefig(fpath)
     return
-

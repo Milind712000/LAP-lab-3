@@ -37,12 +37,12 @@ fp2 = [
 
 statBox = [
     sg.Text("Statistics", size=(20, 1)),
-    sg.Multiline(key='-bigblob-', size=(100, 10))
+    sg.Multiline(key='-bigblob-', size=(80, 10))
 ]
 
 grepBox = [
     sg.Text("Extracted Sentences", size=(20, 1)),
-    sg.Multiline(key='-grep-', size=(100, 10))
+    sg.Multiline(key='-grep-', size=(80, 10))
 ]
 
 topControls = [
@@ -89,7 +89,8 @@ blankFig = os.path.join(baseDir, 'img', 'blankFig.png')
 histoFig = os.path.join(baseDir, 'img', 'histogram.png')
 plotPath = blankFig
 
-window = sg.Window('Text Analyze', layout, finalize=True, font="Helvetica 10")
+window = sg.Window('Text Analyze', layout, location=(0, 0),
+                   finalize=True, font="Helvetica 10").finalize()
 window['-PLOT-'].Update(plotPath)
 
 while True:  # The Event Loop
@@ -103,9 +104,9 @@ while True:  # The Event Loop
         # update avoid list
         avoidWords = getAvoidDict("words_to_avoid.txt")
         # update stats
-        stats = getStats(ltxt, avoidWords)
+        stats, wordcount = getStats(ltxt, avoidWords)
         # update plot
-        plotFrequency(ltxt, histoFig)
+        plotFrequency(wordcount, histoFig)
         plotPath = histoFig
 
     if event == 'Reset':
