@@ -1,6 +1,6 @@
 from collections import Counter
 from matplotlib import pyplot as plt
-
+import re
 
 def getStats(txt, avoid_list):
     # return string of answer
@@ -32,8 +32,13 @@ def getStats(txt, avoid_list):
 
 
 def extractSentences(txt, keyTxt):
-    # return string of answer
-    return keyTxt
+    __ret = ""
+    for line in txt.split("."):
+        for key in keyTxt.split("\n"):
+            if( len(re.findall('\\b'+key+'\\b', line)) > 0 ):
+                __ret += line.strip() + "\n"
+                break
+    return __ret
 
 
 def plotFrequency(wordcount, fpath):
